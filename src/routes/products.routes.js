@@ -9,7 +9,7 @@ const productsController = new ProductsController();
 
 productsRoutes.use(ensureAuthenticated);
 
-productsRoutes.get("/", productsController.index);
+productsRoutes.get("/", verifyUserAuthorization(["customer","admin"]), productsController.index);
 productsRoutes.post("/", verifyUserAuthorization("admin"), productsController.create);
 
 module.exports = productsRoutes;
